@@ -1,21 +1,16 @@
 
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import {SafeAreaView,  StatusBar} from 'react-native';
 
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import Home from './src/telas/Home';
+import Routes from './routes/Routes'
 
 
 export default function App() {
-  return (
-    <Home/>
-      )
+  return <SafeAreaView style={{ flex: 1 }}>
+    <StatusBar />
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
+  </SafeAreaView>
 }
