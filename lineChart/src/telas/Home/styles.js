@@ -2,10 +2,12 @@ import styled from "styled-components/native";
 
 export const Container = styled.SafeAreaView`
 flex: 1;
+
 align-items: center;
 align-self: center;
 background-color: #000;
 width: 100%;
+justify-content: space-around;
 `
 
 export const Header = styled.Text`
@@ -28,10 +30,11 @@ font-size: 20px;
 export const Card = styled.TouchableOpacity`
 align-items: center;
 align-self: center;
-padding: 20px;
+justify-content: space-around;
+padding: 10px;
 background-color: #008000;
 border: 1px solid #ddd;
 border-radius: 10px;
 margin: 10px;
-width: 50%;
+width: 70%;
 `

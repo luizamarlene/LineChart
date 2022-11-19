@@ -9,6 +9,7 @@ export const lineOne = [
     { x: 'Agosto', y: 28 },
     { x: 'Setembro', y: 30 },
     { x: 'Outubro', y: 36 },
+    { x: 'Novembro', y: 32 },
     { x: 'Dezembro', y: 35 }
 ];
 export const lineTwo = [
@@ -21,6 +22,7 @@ export const lineTwo = [
     { x: 'Julho', y: 17 },
     { x: 'Agosto', y: 15 },
     { x: 'Setembro', y: 16 },
-    { x: 'Outubro', y: 15 },
+    { x: 'Outubro', y: 14 },
+    { x: 'Novembro', y: 16 },
     { x: 'Dezembro', y: 10 }
 ];

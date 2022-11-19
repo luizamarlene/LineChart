@@ -8,7 +8,7 @@ import Routes from './routes/Routes'
 
 export default function App() {
   return <SafeAreaView style={{ flex: 1 }}>
-    <StatusBar />
+    <StatusBar backgroundColor={'#000'} />
     <NavigationContainer>
       <Routes />
     </NavigationContainer>
