@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Dimensions, TouchableOpacity } from "react-native";
+import { VictoryLine, VictoryChart, VictoryTooltip, VictoryContainer, VictoryAxis } from "victory-native";
 import * as S from "./styles";
-const { width, height } = Dimensions.get('window')
-import Torch from 'react-native-torch'
+import Tts from 'react-native-tts';
+import back from '../../../assets/back.png'
 import { useNavigation } from "@react-navigation/native";
+import { lineOne } from '../../mocks/Lines'
+import { RNCamera } from 'react-native-camera'
+const { width, height } = Dimensions.get('window')
 
 
 export default function Camera() {
-    const navigation = useNavigation()
+    const [camera, setCamera] = useState < RNCamera | null > (null)
+    const [selfie, setSelfie] = useState({})
 
-     /* const takeSelfie = async () => {
+    const takeSelfie = async () => {
         if (camera) {
             const options = {
                 quality: 0.5,
@@ -24,12 +29,12 @@ export default function Camera() {
                 setLoading(false)
             }
         }
-    }  */
+    }
     
     return (
         <>
-            
-                {/* <RNCamera
+            <S.Header>
+                <RNCamera
                     ref={refCamera => {
                         setCamera(refCamera)
                     }}
@@ -41,22 +46,97 @@ export default function Camera() {
                     captureAudio={false}
                     flashMode={RNCamera.Constants.FlashMode.off}
                     style={{
-                        width: 200,
+                        width: width,
                         height: '100%',
                         position: 'absolute',
                     }}
                     type={RNCamera.Constants.Type.front}
-                /> */}
-            <TouchableOpacity
-                style={{backgroundColor: 'green', alignSelf: 'center'}}
+                />
+                <TouchableOpacity
                     accessibilityLabel="Tirar foto"
-                    onPress={() => { navigation.goBack()
+                    onPress={() => { takeSelfie()
                     }}>
 
                     <S.Text>Camera</S.Text>
                 </TouchableOpacity>
-        
-            
+
+
+
+            </S.Header>
+            <VictoryContainer
+                style={{ backgroundColor: "#000" }}
+                width={width}
+                height={height}
+                events={{ onClick: (event) => Tts.stop() }}
+            >
+                <VictoryChart
+                    horizontal={false}
+                    style={{
+                        axis: { stroke: '#fff', strokeWidth: 5, color: 'red' },
+                        ticks: { stroke: '#fff', strokeWidth: 5 },
+                        tickLabels: {
+                            fill: 'red',
+                        },
+                    }}
+                >
+                    <VictoryAxis
+                        scale="time"
+                        key={lineOne}
+                        standalone={false}
+                        tickValues={lineOne}
+                        style={{
+                            axis: { stroke: '#fff', strokeWidth: 2 },
+                            ticks: { stroke: '#fff', strokeWidth: 1 },
+                            tickLabels: {
+                                fill: '#fff',
+                                fontSize: 16,
+                            },
+                        }}
+                    />
+                    <VictoryAxis dependentAxis
+                        domain={[10, 40]}
+                        offsetX={45}
+                        orientation="left"
+                        standalone={false}
+                        style={{
+                            axis: { stroke: '#fff', strokeWidth: 2 },
+                            ticks: { stroke: '#fff', strokeWidth: 1 },
+                            tickLabels: {
+                                fill: '#fff',
+                                fontSize: 16,
+                            },
+                        }}
+
+                    />
+                    <VictoryLine
+                        events={[{
+                            target: "data",
+                            eventHandlers: {
+                                onClick: () => {
+                                    return [
+                                        {
+                                            target: "labels",
+                                            eventKey: "all",
+                                            mutation: ({ style }) => {
+                                                return style.stroke === "red"
+                                                    ? { style: { stroke: "green", strokeWidth: 50 } }
+                                                    : { style: { stroke: "red", strokeWidth: 50 } };
+                                            }
+                                        }
+                                    ];
+                                }
+                            }
+                        }]}
+                        labelComponent={<VictoryTooltip />}
+                        animate={{ easing: "bounce" }}
+                        data={lineOne}
+                        style={{
+                            data: { stroke: 'green', strokeWidth: 4 }
+                        }}
+
+                    />
+                </VictoryChart>
+            </VictoryContainer>
         </>
     );
 

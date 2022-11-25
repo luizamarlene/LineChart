@@ -1,18 +1,19 @@
 import styled from "styled-components/native";
+import { VictoryContainer } from "victory-native";
 
-export const Container = styled.View`
+
+export const Container = styled(VictoryContainer)`
     align-items: center;
     background-color: #000;
 `
 
 export const Back = styled.TouchableOpacity`
-    margin-left: 20px;
-    margin-right: 20px;
+margin-left: 10px;
 `
 
 export const BackIcon = styled.Image`
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
 `
 
 export const Header = styled.View`
@@ -21,7 +22,6 @@ export const Header = styled.View`
     align-items: center;
     background-color: #000;
     padding: 5px 20px;
-    width: 100%;
 `
 
 export const Text = styled.Text`
